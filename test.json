@@ -1,0 +1,27 @@
+{
+    "product": [
+        {
+            "id": 3,
+            "name": "p111",
+            "price": 3.98,
+            "params": ["id"],
+            "category_name": "p111",
+            "available": true,
+            "qty_values": {
+                "max": "100",
+                "min": "5"
+            },
+            "product_type": "amount"
+        },
+        {
+            "id": 4,
+            "name": "p222",
+            "price": 0.00199,
+            "params": [],
+            "category_name": "zzz",
+            "available": true,
+            "qty_values": null,
+            "product_type": "package"
+        }
+    ]
+}
