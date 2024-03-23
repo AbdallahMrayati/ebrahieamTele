@@ -35,9 +35,14 @@
                                             <td>{{ $user->id }}</td>
                                             <td> {{ $user->username }} </td>
                                             <td> {{ $user->name }} </td>
-                                            <td>{{ $user->role->name }}</td>
                                             <td>
-
+                                                @if ($user->roles->isNotEmpty())
+                                                    {{ $user->roles->first()->name }}
+                                                @else
+                                                    No role assigned
+                                                @endif
+                                            </td>
+                                            <td>
                                                 <a href="#edit{{ $user->id }}" data-bs-toggle="modal"
                                                     class="btn btn-xs btn-warning" title="تعديل"
                                                     onclick="senddata('main','todo=admin_users&amp;btn=edit&amp;id=3')">
@@ -50,7 +55,8 @@
                                                     <i class="fas fa-key"></i>
                                                 </a>
                                                 <!-- 2 group 2 -->
-                                                <a href="#permissions{{ $user->role_id }}" data-bs-toggle="modal"
+
+                                                <a href="{{ route('permissionsUserPage', $user->id) }}"
                                                     class="btn btn-success btn-xs" title="الصلاحيات"> <i
                                                         class="fa fa-user-lock"></i> </a>
                                                 @if ($user->role_id == 2)

@@ -19,9 +19,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 
 Auth::routes();
@@ -30,23 +30,18 @@ Auth::routes();
 Route::group(['middleware' => ['auth']], function () {
 
     //  dashboard
-    Route::get('/dashboard', function () {
+    Route::get('/', function () {
         return view('layouts.admin');
     })->name('dashboard');
 
-
     // users
-    Route::resource('users', UserController::class);
-    // Route::get('user/createUser', [UserController::class, 'create'])->name('create-User');
+    Route::resource('admin/users', UserController::class);
+    Route::post('admin/user/{id}/update-state', [UserController::class, 'updateUserState'])->name('updateUserState');
+    Route::get('admin/users/permissionsUserPage/{id}', [UserController::class, 'permissionsUserPage'])->name('permissionsUserPage');
+    Route::post('admin/users/changePermissions/{id}', [UserController::class, 'changePermissions'])->name('changePermissions');
+
+    Route::post('/user/{id}/reset-password', [UserController::class, 'resetPassword'])->name('resetPassword');
 });
 
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-
-Route::get('/testPermissions', function () {
-    $roleId = 2;
-
-    $role = Role::with('permissions.permissionType')->find($roleId);
-    return $role;
-});

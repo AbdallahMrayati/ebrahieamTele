@@ -17,8 +17,8 @@ return new class extends Migration
             $table->string('username')->unique();
             $table->string('password');
             $table->integer('creditBalance')->default(0);
-            $table->unsignedBigInteger('role_id');
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            $table->boolean('is_disabled')->default(false);
+
             $table->rememberToken();
             $table->timestamps();
         });
